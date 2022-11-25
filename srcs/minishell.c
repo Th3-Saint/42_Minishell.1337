@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aait-mas <aait-mas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 16:02:44 by mrobaii           #+#    #+#             */
-/*   Updated: 2022/11/25 22:11:38 by mrobaii          ###   ########.fr       */
+/*   Updated: 2022/11/25 22:51:53 by aait-mas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,16 @@ void	lets_go(t_mini *mini, char *line, t_cmd **cmd, char **envp)
 
 void	signal_handler(int signal)
 {
-
-		if(signal == SIGINT)
-		{
-			printf("\n");
-			rl_on_new_line();
-			rl_replace_line("", 0); 
-			rl_redisplay();
-		}
+	if(signal == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		//rl_replace_line("", 0); 
+		rl_redisplay();
+	}
 }
 
-void cmd_free(t_var *var)
+void	cmd_free(t_var *var)
 {
 	t_cmd	*tmp;
 	t_file  *temp;
@@ -100,8 +99,8 @@ int	main(int ac, char **av, char **ev)
 	signal(SIGQUIT, SIG_IGN);
 	while (1)
 	{
-		var->envp = list_to_array(var->env); // char **
-		var->line = readline("minishell-13.37$ "); //char *
+		var->envp = list_to_array(var->env);
+		var->line = readline("minishell-13.37$ ");
 		if (var->line == NULL)
 		{
 			printf("exit\n");

@@ -3,54 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   minishel.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aait-mas <aait-mas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/06 16:43:24 by aait-mas          #+#    #+#             */
-/*   Updated: 2022/11/25 22:18:23 by mrobaii          ###   ########.fr       */
+/*   Created: 2022/11/25 22:45:14 by aait-mas          #+#    #+#             */
+/*   Updated: 2022/11/25 22:48:37 by aait-mas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef MINISHEL_H
+# define MINISHEL_H
 
-#ifndef MINISHELL_H
-#define MINISHELL_H
-
-#include "../libft/libft.h"
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
-#include <dirent.h>
-#include <sys/wait.h>
-#include <limits.h>
-#include <errno.h>
-#include <signal.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-#include "../includes/lexer.h"
-#include "../includes/token.h"
-#include "../includes/parser.h"
+# include "../libft/libft.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <string.h>
+# include <fcntl.h>
+# include <dirent.h>
+# include <sys/wait.h>
+# include <limits.h>
+# include <errno.h>
+# include <signal.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include "../includes/lexer.h"
+# include "../includes/token.h"
+# include "../includes/parser.h"
 
 typedef struct minishel
 {
-	t_token *token;
-	t_lexer *lexer;
-	char **env;
-} t_mini;
+	t_token	*token;
+	t_lexer	*lexer;
+	char	**env;
+}	t_mini;
 
 typedef struct t_env
 {
-	int ret_val;
-	struct t_env *next;
-} t_env;
-t_env *g_env;
+	int				ret_val;
+	struct t_env	*next;
+}	t_env;
 
-typedef struct  t_envp
+typedef struct t_envp
 {
-	char	*var;
-	char	*key;
-	char	*value;
-	struct t_envp *next;
+	char			*var;
+	char			*key;
+	char			*value;
+	struct t_envp	*next;
 }	t_envp;
 
 typedef struct variables{
@@ -74,7 +72,7 @@ typedef struct exec_var
 }	t_exec;
 
 int		get_var(int op, int value);
-void	lets_go(t_mini *mini,char *line, t_cmd **cmd, char **envp);
+void	lets_go(t_mini *mini, char *line, t_cmd **cmd, char **envp);
 void	correction2(t_token *token);
 void	free_norm(char *tmp, char *c);
 int		help_gbdq(t_lexer *lexer);
@@ -110,4 +108,5 @@ void	free_export_node(t_envp *env);
 int		check_error_export(char *str);
 char	*expand_env(t_envp *env, char *var);
 void	updatt_pwd(t_envp *env, char *value, char *var);
+
 #endif

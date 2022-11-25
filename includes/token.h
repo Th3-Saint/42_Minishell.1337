@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aait-mas <aait-mas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:47:09 by aait-mas          #+#    #+#             */
-/*   Updated: 2022/11/25 22:18:41 by mrobaii          ###   ########.fr       */
+/*   Updated: 2022/11/25 22:37:18 by aait-mas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
-#define TOKEN_H
-#include "minishel.h"
+# define TOKEN_H
+# include "minishel.h"
 
 typedef struct token
 {
@@ -31,17 +31,9 @@ typedef struct token
 		TOKEN_DOUBLE_QUOTES,
 		TOKEN_SINGLE_QUOTE,
 		TOKEN_X,
-	} type;
-	char *value;
-	struct token *next;
-} t_token;
+	} e_tokn;
+	char			*value;
+	struct token	*next;
+}	t_token;
 
-t_token *token_init(char *value, int type);
-void token_add_back(t_token **token, char *value, int type);
-int check_special_char(char c);
-int ft_lstsize(t_token *token);
-char *check_env(char *str, char **env);
-void correction1(t_token *token);
-char **return_cmd(char *str);
-int heredoc(char *del, int *flag);
 #endif

@@ -14,9 +14,14 @@ SRC	= ./srcs/minishell.c \
 	./srcs/lexer/lexer1.c \
 	./srcs/lexer/lexer2.c \
 	./srcs/lexer/lexer3.c \
-	./srcs/lexer/token.c \
-	./srcs/parser/parser.c \
-	./srcs/lexer/free.c \
+	./srcs/lexer/lexer4.c \
+	./srcs/lexer/lexer5.c \
+	./srcs/lexer/lexer6.c \
+	./srcs/parser/parser1.c \
+	./srcs/parser/parser2.c \
+	./srcs/parser/parser3.c \
+	./srcs/parser/parser4.c 
+
 
 lib = ./libft/libft.a
 OBJS=$(SRC:.c=.o)
