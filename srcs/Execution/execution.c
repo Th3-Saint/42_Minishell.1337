@@ -6,7 +6,7 @@
 /*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 02:18:02 by mrobaii           #+#    #+#             */
-/*   Updated: 2022/11/25 22:09:51 by mrobaii          ###   ########.fr       */
+/*   Updated: 2022/11/26 01:13:37 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,44 +40,6 @@ char	*path_finder(char **str, char *cmd)
 	return (NULL);
 }
 
-void	open_files(t_cmd *cmd)
-{
-	t_file	*tmp;
-	int		save;
-	int		flag;
-
-	save = -1;
-	flag = 0;
-	while (cmd)
-	{
-		cmd->infile = -1;
-		cmd->outfile = -1;
-		tmp = cmd->file;
-		while (tmp)
-		{
-			if (tmp->type == TOKEN_REDIR_IN)
-				cmd->infile = open(tmp->file, O_RDONLY);
-			else if (tmp->type == TOKEN_REDIR_OUT)
-				cmd->outfile = open(tmp->file, O_WRONLY | O_CREAT
-						| O_TRUNC, 0644);
-			else if (tmp->type == D_TOKEN_REDIR_OUT)
-				cmd->outfile = open(tmp->file, O_WRONLY | O_CREAT
-						| O_APPEND, 0644);
-			else if (tmp->type == D_TOKEN_REDIR_IN && flag == 0)
-			{
-				save = dup(STDIN_FILENO);
-				signal(SIGINT, SIG_IGN);
-				cmd->infile = heredoc(tmp->file, &flag);
-				signal(SIGINT, signal_handler);
-			}
-			if (save != -1)
-				dup2(save, 0);
-		tmp = tmp->next;
-		}
-	cmd = cmd->next;
-	}
-}
-
 char	*ft_find_path(t_envp *env)
 {
 	while (env)
@@ -89,13 +51,8 @@ char	*ft_find_path(t_envp *env)
 	return (NULL);
 }
 
-void	execution(t_cmd *cmd, t_envp **env)
+int	inisialize_builtins(t_exec *var, t_cmd *cmd, t_envp **env)
 {
-	t_exec	*var;
-	int		res;
-
-	res = 0;
-	var = malloc(sizeof(t_exec));
 	var->status = -10;
 	var->fd_save = -1;
 	open_files(cmd);
@@ -105,10 +62,15 @@ void	execution(t_cmd *cmd, t_envp **env)
 	{
 		bultins(cmd, env);
 		free (var->fd);
-		free (var);
 		ft_free(var->path);
-		return ;
+		free (var);
+		return (1);
 	}
+	return (0);
+}
+
+void	execute_commands(t_cmd *cmd, t_envp **env, t_exec *var)
+{
 	while (cmd)
 	{
 		var->cmd_path = path_finder(var->path, cmd->cmd[0]);
@@ -129,12 +91,24 @@ void	execution(t_cmd *cmd, t_envp **env)
 		close(var->fd[1]);
 		cmd = cmd->next;
 	}
+}
+
+void	execution(t_cmd *cmd, t_envp **env)
+{
+	t_exec	*var;
+	int		res;
+
+	res = 0;
+	var = malloc(sizeof(t_exec));
+	if (inisialize_builtins(var, cmd, env))
+		return ;
+	execute_commands(cmd, env, var);
 	close(var->fd[0]);
 	free(var->fd);
 	ft_free(var->path);
 	while (res != -1)
 		res = waitpid(-1, &var->status, 0);
-	if (var->status != - 10)
+	if (var->status != -10)
 	{
 		if (WIFEXITED(var->status))
 			get_var(1, WEXITSTATUS(var->status));

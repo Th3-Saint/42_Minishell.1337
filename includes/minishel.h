@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishel.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-mas <aait-mas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 22:45:14 by aait-mas          #+#    #+#             */
-/*   Updated: 2022/11/25 22:48:37 by aait-mas         ###   ########.fr       */
+/*   Updated: 2022/11/26 01:14:17 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ void	free_export_node(t_envp *env);
 int		check_error_export(char *str);
 char	*expand_env(t_envp *env, char *var);
 void	updatt_pwd(t_envp *env, char *value, char *var);
+void	open_files(t_cmd *cmd);
 
 #endif

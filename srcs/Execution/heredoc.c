@@ -6,11 +6,34 @@
 /*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 22:16:09 by mrobaii           #+#    #+#             */
-/*   Updated: 2022/11/25 22:08:59 by mrobaii          ###   ########.fr       */
+/*   Updated: 2022/11/26 02:16:51 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishel.h"
+
+int	get_var(int op, int value)
+{
+	static int		exit_status = 0;
+
+	if (op == 0)
+		return (exit_status);
+	if (op == 1)
+		exit_status = value;
+	return (0);
+}
+
+void	signal_handler(int signal)
+{
+	if (signal == SIGINT)
+	{
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		get_var(1, 1);
+	}
+}
 
 void	child(int fd, char *del)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-mas <aait-mas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 03:36:40 by aait-mas          #+#    #+#             */
-/*   Updated: 2022/11/25 22:33:16 by aait-mas         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:06:50 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int	check_error_flags(t_token *token)
 			if (tmp->next == NULL)
 				return (0);
 			if (!(tmp->next->e_tokn == TOKEN_DOLLAR
-					|| tmp->next->e_tokn == TOKEN_SINGLE_QUOTE
-					|| tmp->next->e_tokn == TOKEN_DOUBLE_QUOTES
+					|| tmp->next->e_tokn == TKN_SQ
+					|| tmp->next->e_tokn == TKN_DQ
 					|| tmp->next->e_tokn == TOKEN_WORD))
 				return (0);
 		}

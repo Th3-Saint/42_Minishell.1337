@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer6.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-mas <aait-mas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 03:16:13 by aait-mas          #+#    #+#             */
-/*   Updated: 2022/11/25 22:32:55 by aait-mas         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:06:50 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ char	*get_name_file(t_token *tmp)
 
 	tmp = tmp->next;
 	str = tmp->value;
-	while (tmp->next->e_tokn == TOKEN_SINGLE_QUOTE
-		|| tmp->next->e_tokn == TOKEN_DOUBLE_QUOTES)
+	while (tmp->next->e_tokn == TKN_SQ
+		|| tmp->next->e_tokn == TKN_DQ)
 	{
 		tmp = tmp->next;
 		temp = str;

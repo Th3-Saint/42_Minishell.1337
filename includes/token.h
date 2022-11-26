@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-mas <aait-mas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 16:47:09 by aait-mas          #+#    #+#             */
-/*   Updated: 2022/11/25 22:37:18 by aait-mas         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:06:50 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct token
 		TOKEN_DOLLAR,
 		TOKEN_SPACE,
 		TOKEN_FLAG,
-		TOKEN_DOUBLE_QUOTES,
-		TOKEN_SINGLE_QUOTE,
+		TKN_DQ,
+		TKN_SQ,
 		TOKEN_X,
 	} e_tokn;
 	char			*value;

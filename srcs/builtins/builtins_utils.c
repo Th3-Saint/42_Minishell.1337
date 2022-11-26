@@ -6,7 +6,7 @@
 /*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 18:10:22 by mrobaii           #+#    #+#             */
-/*   Updated: 2022/11/25 22:07:33 by mrobaii          ###   ########.fr       */
+/*   Updated: 2022/11/26 01:26:52 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,11 @@ void	del_node(t_envp **env, char *str)
 			{
 				*env = head->next;
 				free_export_node(head);
+				return ;
 			}
-			else
-			{
-				previous->next = head->next;
-				free_export_node(head);
-			}
+			previous->next = head->next;
+			free_export_node(head);
+			return ;
 		}
 		previous = head;
 		head = head->next;

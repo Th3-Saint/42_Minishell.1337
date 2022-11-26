@@ -11,6 +11,7 @@ SRC	= ./srcs/minishell.c \
 	./srcs/builtins/builtins_2.c \
 	./srcs/utils/utils_1.c \
 	./srcs/utils/utils_2.c \
+	./srcs/Execution/open_files.c \
 	./srcs/lexer/lexer1.c \
 	./srcs/lexer/lexer2.c \
 	./srcs/lexer/lexer3.c \

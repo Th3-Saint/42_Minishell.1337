@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-mas <aait-mas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 03:36:24 by aait-mas          #+#    #+#             */
-/*   Updated: 2022/11/25 22:33:00 by aait-mas         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:07:08 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,17 @@ t_cmd	*get_cmd(t_token *tmp, t_cmd *cmd, char *str, t_file *file)
 {
 	while (tmp)
 	{
-		if (tmp->e_tokn == D_TOKEN_REDIR_IN || tmp->e_tokn == D_TOKEN_REDIR_OUT || tmp->e_tokn == TOKEN_REDIR_IN || tmp->e_tokn == TOKEN_REDIR_OUT)
+		if (tmp->e_tokn == D_TOKEN_REDIR_IN || tmp->e_tokn == D_TOKEN_REDIR_OUT
+			|| tmp->e_tokn == TOKEN_REDIR_IN || tmp->e_tokn == TOKEN_REDIR_OUT)
 		{
 			file_add_back(&file, tmp->next->value, tmp->e_tokn);
 			tmp = tmp->next;
 		}
-		else if (tmp->e_tokn == TOKEN_DOUBLE_QUOTES || tmp->e_tokn == TOKEN_SINGLE_QUOTE || tmp->e_tokn == TOKEN_WORD || tmp->e_tokn == TOKEN_SPACE)
+		else if (tmp->e_tokn == TKN_DQ || tmp->e_tokn == TKN_SQ \
+		|| tmp->e_tokn == TOKEN_WORD || tmp->e_tokn == TOKEN_SPACE)
 		{
-			if (tmp->e_tokn == TOKEN_DOUBLE_QUOTES || tmp->e_tokn == TOKEN_SINGLE_QUOTE)
+			if (tmp->e_tokn == TKN_DQ
+				|| tmp->e_tokn == TKN_SQ)
 				tmp->value = ft_change(tmp);
 			str = get_string(tmp, str);
 		}

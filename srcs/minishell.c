@@ -3,15 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-mas <aait-mas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 16:02:44 by mrobaii           #+#    #+#             */
-/*   Updated: 2022/11/25 22:51:53 by aait-mas         ###   ########.fr       */
+/*   Updated: 2022/11/26 02:07:10 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishel.h"
 
+#define RESET   "\033[0m"
+#define BLUE   "\033[32m"      /* Green */
 int	check_all_space(char *str)
 {
 	int	i;
@@ -23,17 +25,6 @@ int	check_all_space(char *str)
 			return (1);
 			i++;
 	}
-	return (0);
-}
-
-int	get_var(int op, int value)
-{
-	static int		exit_status = 0;
-
-	if (op == 0)
-		return (exit_status);
-	if (op == 1)
-		exit_status = value;
 	return (0);
 }
 
@@ -51,23 +42,12 @@ void	lets_go(t_mini *mini, char *line, t_cmd **cmd, char **envp)
 	free(line);
 }
 
-void	signal_handler(int signal)
-{
-	if(signal == SIGINT)
-	{
-		printf("\n");
-		rl_on_new_line();
-		//rl_replace_line("", 0); 
-		rl_redisplay();
-	}
-}
-
 void	cmd_free(t_var *var)
 {
 	t_cmd	*tmp;
-	t_file  *temp;
+	t_file	*temp;
 
-	while(var->cmd)
+	while (var->cmd)
 	{
 		tmp = var->cmd;
 		var->cmd = var->cmd->next;
@@ -81,26 +61,32 @@ void	cmd_free(t_var *var)
 		ft_free(tmp->cmd);
 		free(tmp);
 	}
+	free(var->envp);
+}
+
+void	inisialize_main(t_var **var, char **ev)
+{
+	*var = malloc(sizeof(t_var));
+	(*var)->line = NULL;
+	(*var)->mini = malloc(sizeof(t_mini));
+	(*var)->env = inisialize_env(ev);
+	get_var(1, 0);
+	(*var)->cmd = NULL;
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 int	main(int ac, char **av, char **ev)
 {
 	t_var	*var;
-	
+
 	(void) ac;
 	(void) av;
-	var = malloc(sizeof(t_var));
-	var->line = NULL;
-	var->mini = malloc(sizeof(t_mini));
-	var->env = inisialize_env(ev);
-	get_var(1, 0);
-	var->cmd = NULL;
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, SIG_IGN);
+	inisialize_main(&var, ev);
 	while (1)
 	{
 		var->envp = list_to_array(var->env);
-		var->line = readline("minishell-13.37$ ");
+		var->line = readline(BLUE "minishell-13.37$  " RESET);
 		if (var->line == NULL)
 		{
 			printf("exit\n");
@@ -113,8 +99,6 @@ int	main(int ac, char **av, char **ev)
 		}
 		else
 			free(var->line);
-
-		ft_free(var->envp);
 		if (var->cmd)
 			execution(var->cmd, &var->env);
 		cmd_free(var);

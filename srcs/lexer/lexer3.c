@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aait-mas <aait-mas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/25 03:04:45 by aait-mas          #+#    #+#             */
-/*   Updated: 2022/11/25 22:32:42 by aait-mas         ###   ########.fr       */
+/*   Updated: 2022/11/25 23:06:50 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	get_btw_single_quote(t_lexer *lexer, t_token *token)
 		lexer_move(lexer);
 	}
 	lexer_move(lexer);
-	token_add_back(&token, value, TOKEN_SINGLE_QUOTE);
+	token_add_back(&token, value, TKN_SQ);
 	free(value);
 	check_after_space(lexer, token);
 }
@@ -64,7 +64,7 @@ void	get_btw_double_quote(t_lexer *lexer, t_token *token, char **env)
 			str = convert_char_to_str(lexer->c);
 		value = help_gbdq_1(lexer, str, value);
 	}
-	token_add_back(&token, value, TOKEN_DOUBLE_QUOTES);
+	token_add_back(&token, value, TKN_DQ);
 	free(value);
 	lexer_move(lexer);
 	check_after_space(lexer, token);
