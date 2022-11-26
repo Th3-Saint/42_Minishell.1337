@@ -6,7 +6,7 @@
 /*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/20 16:02:44 by mrobaii           #+#    #+#             */
-/*   Updated: 2022/11/26 02:07:10 by mrobaii          ###   ########.fr       */
+/*   Updated: 2022/11/26 02:31:21 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	cmd_free(t_var *var)
 		ft_free(tmp->cmd);
 		free(tmp);
 	}
-	free(var->envp);
+	ft_free(var->envp);
 }
 
 void	inisialize_main(t_var **var, char **ev)

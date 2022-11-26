@@ -6,7 +6,7 @@
 /*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 00:45:33 by aait-mas          #+#    #+#             */
-/*   Updated: 2022/11/09 04:55:47 by mrobaii          ###   ########.fr       */
+/*   Updated: 2022/11/26 03:14:12 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 	size_t	i;
 
 	i = 0;
-		printf("OK\n");
-		exit(0);
 	if (size == 0)
 		return (ft_strlen(src));
 	else

@@ -6,7 +6,7 @@
 /*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 00:59:03 by aait-mas          #+#    #+#             */
-/*   Updated: 2022/11/12 10:56:33 by mrobaii          ###   ########.fr       */
+/*   Updated: 2022/11/26 03:14:37 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	p[i] = '\0';
-	// free(s1);
 	return (p);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 18:13:52 by mrobaii           #+#    #+#             */
-/*   Updated: 2022/11/25 22:07:21 by mrobaii          ###   ########.fr       */
+/*   Updated: 2022/11/26 03:05:08 by mrobaii          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_cd(char *cmd, t_envp *env)
 			return ;
 		}
 		perror(NULL);
+		get_var(1, 1);
 	}
 	if (!getcwd(pwd, 1024))
 		perror(NULL);
