@@ -1,3 +1,28 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/12/21 18:39:56 by mrobaii           #+#    #+#              #
+#    Updated: 2022/12/21 18:42:09 by mrobaii          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+define HEADER
+
+ _   _  _  _   _  _  ___   _  _  ____  _    _   
+( `-' )( )( \ ( )( )/  _) ( )( )(  __)( )  ( )  
+| \_/ || || \\| || |\_"-. | L| || |_  | |  | |  
+( ) ( )( )( )\\ )( ) __) )( __ )(  _) ( )_ ( )_ 
+/_\ /_\/_\/_\ \_\/_\/___/ /_\/_\/____\/___\/___\
+                                                
+
+endef
+export HEADER
+
+
 NAME=minishel
 CC=gcc
 CFLAGS=-Wall -Wextra -Werror #-fsanitize=address -g
@@ -29,10 +54,11 @@ OBJS=$(SRC:.c=.o)
 readline=-lreadline
 LDFLAGS=-L ~/goinfre/.brew/opt/readline/lib
 CPPFLAGS=-I ~/goinfre/.brew/opt/readline/include
-all:$(NAME)
+all: $(NAME)
 
 $(NAME): $(OBJS) $(lib)
-	$(CC) -g $(CFLAGS) $(OBJS) $(lib) $(readline)  $(LDFLAGS)  $(CPPFLAGS) -o $(NAME) 
+	$(CC) -g $(CFLAGS) $(OBJS) $(lib) $(readline)  $(LDFLAGS)  $(CPPFLAGS) -o $(NAME)
+	@ echo "\033[38;5;46m$$HEADER\n"
 $(lib): 
 	make -C ./libft
 				
